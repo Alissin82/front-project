@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <title>فراهنرجو - دکمه outline</title>
+        <script src="https://kit.fontawesome.com/6b852257bc.js" crossorigin="anonymous"></script>
+        <style>
+            @font-face {
+                font-family: iransans; 
+                src: url(font/iransansweb.ttf);
+              }
+
+            *{
+                font-size: 16px;
+                font-family: iransans;
+            }
+
+            button{
+                min-width:4em;
+                min-height:2em;
+                text-align: center;
+                padding: 0.1em 1em;
+                font-weight: bold;
+                border-radius: 0.5em;
+                cursor: pointer;
+            }
+
+            button *{
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            .outline_button{
+                background-color: transparent;
+                color: #661FFF;
+                border: 0.1em solid #8F8F8F ;
+            }
+
+            .outline_button:disabled{
+                cursor: default;
+                color: #8F8F8F;
+            }
+
+            .outline_button:hover{
+                background-color: rgba(143, 143, 143, 0.1);
+            }
+
+            .outline_button:focus{
+                background-color: rgba(102, 31, 143, 0.2);
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <button class="outline_button">
+            بعدی
+            <i class="fas fa-angle-left" ></i>
+        </button>
+    </body>
+
+</html>
