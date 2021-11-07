@@ -1,0 +1,152 @@
+@font-face {
+    font-family: iransans; 
+    src: url(font/iransansweb.ttf);
+  }
+
+*{
+    font-size: 16px;
+    font-family: iransans;
+}
+
+button{
+    min-width:4em;
+    min-height:2em;
+    text-align: center;
+    padding: 0.1em 1em;
+    font-weight: bold;
+    border-radius: 0.5em;
+    cursor: pointer;
+    border: 0.1em solid transparent;
+}
+
+button:disabled{
+    cursor: default;
+}
+
+button *{
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+/*filled_button*/
+
+.filled_button{
+    background-color: #6750A4;
+    color: #FFFFFF;
+}
+
+.filled_button:disabled{
+    background-color: #1C1B1F;
+    opacity: 12%;
+}
+
+.filled_button:disabled *{
+    color: #1C1B1F;
+    opacity: 38%;
+}
+
+.filled_button:hover{
+    background-color: #6750A4;
+    color: #FFFFFF;
+}
+
+.filled_button:focus{
+    background-color: #6750A4;
+    color: #FFFFFF;
+}
+
+
+
+/*filled_tonal_button*/
+
+.filled_tonal_button{
+    background-color: #E8DEF8;
+    color: #1E192B;
+}
+.filled_tonal_button .icon{
+    color: #FFFFFF;
+}
+
+.filled_tonal_button:disabled{
+    background-color: #1C1B1F;
+    opacity: 12%;
+}
+
+.filled_tonal_button:disabled *{
+    color: #1C1B1F;
+    opacity: 38%;
+}
+
+.filled_tonal_button:hover{
+    background-color: #1E192B;
+    color: #1E192B;
+}
+
+.filled_tonal_button:focus{
+    background-color: #1E192B;
+    color: #1E192B;
+}
+
+
+
+/*outline_button*/
+
+.outline_button{
+    background-color: #FFFBFE;
+    border-color: #79747E;
+    color: #6750A4;
+}
+
+.filled_tonal_button:disabled{
+    background-color: #1C1B1F;
+    opacity: 12%;
+}
+
+.filled_tonal_button:disabled *{
+    color: #1C1B1F;
+    opacity: 38%;
+}
+
+.filled_tonal_button:hover{
+    background-color: #FFFBFE;
+    border-color: #79747E;
+    color: #6750A4;
+}
+
+.filled_tonal_button:focus{
+    background-color: #6750A4;
+    border-color: #6750A4;
+    color: #6750A4;
+}
+
+
+
+/*text_button*/
+
+.text_button{
+    background-color: transparent;
+    color: #6750A4;
+}
+
+.filled_tonal_button:disabled{
+    background-color: #1C1B1F;
+    opacity: 12%;
+}
+
+.filled_tonal_button:disabled *{
+    color: #1C1B1F;
+    opacity: 38%;
+}
+
+.filled_tonal_button:hover{
+    background-color:#6750A4;
+    color: #6750A4;
+}
+
+.filled_tonal_button:focus{
+    background-color: #6750A4;
+    color: #6750A4;
+}
