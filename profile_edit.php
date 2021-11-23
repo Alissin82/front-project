@@ -13,7 +13,7 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="utf-8">
-    <title>فراهنرجو - ثبت نام</title>
+    <title>فراهنرجو - ویرایش پروفایل</title>
     <?php include('php/head.php') ?>
   </head>
   <body>
@@ -25,40 +25,56 @@
                 <div class="row">
                     <p class='alert alert-danger' id="error" style="display:none">  </p>
                     <?php
-                        $error = false;
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            require('php/server.php');
-                            $db = connect();
+                        require('php/server.php');
+                        $db = connect();
+                        if (isset($_GET['code']) and $_GET['code'] != null) {
+                            
+                            $accounts = $db->query('SELECT * FROM users_table WHERE u_rowid = ?', $_GET['code'])->fetchArray();
 
-                            $u_username = $_POST['u_username'];
+                            if ($accounts == NULL) {
+                                die("<p class='alert alert-danger alert-dismissible fade show'><strong>خطا</strong> پروفایل کاربر مورد نظر برای ویرایش یافت نشد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>");
+                            }
+
+                            $u_rowid = $accounts['u_rowid'];
+                            $u_name = $accounts['u_name'];
+                            $u_email = $accounts['u_email'];
+                            $u_phonenumber = $accounts['u_phonenumber'];
+                            $u_username = $accounts['u_username'];
+                        }
+
+                        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                            $u_rowid = $_POST['u_rowid'];
                             $u_name = $_POST['u_name'];
-                            $u_password = $_POST['u_password'];
                             $u_email = $_POST['u_email'];
                             $u_phonenumber = $_POST['u_phonenumber'];
+                            $u_username = $_POST['u_username'];
 
-                            $insert = $db->query('INSERT INTO users_table 
-                            (u_username, u_name, u_password, u_email, u_phonenumber)
-                            VALUES 
-                            (?,?,?,?,?)'
-                            ,$u_username,$u_name,$u_password,$u_email,$u_phonenumber);
+                            $update = $db->query('UPDATE users_table SET
+                            u_name = ?,u_username = ? ,u_email = ?,
+                            u_phonenumber = ?
+                            WHERE u_rowid = ?',
+                            $u_name,$u_username,$u_email,$u_phonenumber
+                            , $u_rowid);
+                            
+                            $result = $update->affectedRows();
 
-                            $result = $insert->affectedRows();
-
-                            if ($result) {
-                                echo "<p class='alert alert-success alert-dismissible fade show'><strong>پیام سیستم</strong> عضویت شما با موفقیت انجام شد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
+                            if ($result > 0) {
+                                echo "<p class='alert alert-success alert-dismissible fade show'><strong>پیام سیستم</strong> ویرایش پروفایل شما با موفقیت انجام شد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
                             }
                             else {
-                                echo "<p class='alert alert-danger alert-dismissible fade show'><strong>اخطار</strong> عضویت شما به مشکل برخورد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
+                                echo "<p class='alert alert-danger alert-dismissible fade show'><strong>خطا</strong> ویرایش پروفایل شما به مشکل برخورد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
                             }
                         }
                     ?>
                 </div>
                 <form name="register" id="register" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                    <input type="hidden" name="u_rowid" value="<?php echo $u_rowid; ?>">
                     <div class="form-group row">
                         <div class="form-group col-md-12">
                             <span class="require">* </span>
                             <label for="">نام کاربری : </label>
-                            <input class="form-control" id="u_username" name="u_username" maxlength="20" required onkeyup="checkAvaibility(this.value)">
+                            <input class="form-control" id="u_username" name="u_username" maxlength="20" required value="<?php echo $u_username; ?>">
                             <p class='alert alert-danger' id="untxtavaible" style="display:none">  </p>
                         </div>
                     </div>
@@ -66,21 +82,7 @@
                     <div class="form-group row">
                         <div class="form-group col-md-12">
                             <label for="">نام و نام خانوادگی : </label>
-                            <input class="form-control" type="text" id="u_name" name="u_name">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="form-group col-md-6">
-                            <span class="require">* </span>
-                            <label for="">رمز عبور : </label>
-                            <input class="form-control" type="password" id="u_password" name="u_password" maxlength="20" required>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <span class="require">* </span>
-                            <label for="">تکرار رمز عبور : </label>
-                            <input class="form-control" type="password" id="u_repeat_password" name="u_repeat_password" maxlength="20" required>
+                            <input class="form-control" type="text" id="u_name" name="u_name" value="<?php echo $u_name; ?>">
                         </div>
                     </div>
 
@@ -88,14 +90,14 @@
                         <div class="form-group col-md-12">
                             <span class="require">* </span>
                             <label for="">پست الکترونیکی(ایمیل) : </label>
-                            <input class="form-control" type="email" id="u_email" name="u_email" required>
+                            <input class="form-control" type="email" id="u_email" name="u_email" required value="<?php echo $u_email; ?>">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="form-group col-md-12">
                             <label for=""> شماره تماس : </label>
-                            <input class="form-control" type="text" id="u_phonenumber" name="u_phonenumber">
+                            <input class="form-control" type="text" id="u_phonenumber" name="u_phonenumber" value="<?php echo $u_phonenumber; ?>">
                         </div>
                     </div>
 

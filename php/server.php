@@ -1,5 +1,5 @@
 <?php
-  function connect(){
+  /*function connect(){
 
     $connection = mysqli_connect('localhost','root','','front-project');
     if (!$connection) {
@@ -9,5 +9,20 @@
     mysqli_set_charset($connection,"utf8");
 
     return $connection;
+  }*/
+
+  function connect(){
+
+    include('db.php');
+	
+    $dbhost = 'localhost';
+    $dbuser = 'root';
+    $dbpass = '';
+    $dbname = 'ali_ansaripoor';
+
+    $db = new db($dbhost, $dbuser, $dbpass, $dbname);
+
+    return $db;
   }
+  
  ?>

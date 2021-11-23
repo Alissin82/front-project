@@ -13,7 +13,7 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="utf-8">
-    <title>فراهنرجو - ثبت نام</title>
+    <title>فراهنرجو - پنل ادمین</title>
     <?php include('php/head.php') ?>
   </head>
   <body>
@@ -22,8 +22,14 @@
         <section class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
+                <h2>پنل خصوصی ادمین های فراهنرجو</h2>
                 <div class="row">
-                    <p class="alert alert-secondary"> در دست ساخت، صبور باشید </p>
+                    <ul>
+                        <li><a href="admin_blog_view.php">ثبت پست جدید وبلاگ</a></li>
+                        <li> <a href="admin_users_view.php">مشاهده کاربران</a> </li>
+                        <li> <a href="addcontent.php">مشاهده پست های وبلاگ</a> </li>
+                    </ul>
+                    
                 </div>
             </div>
             <div class="col-md-4"></div>

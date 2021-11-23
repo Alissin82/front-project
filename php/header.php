@@ -1,14 +1,12 @@
-<header style="position:sticky;top:0;padding:10px;z-index:1;" class="fixed-top">
+<header class="fixed-top">
 
   <nav class="navbar navbar-expand-md navbar-dark text-black">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Brand -->
-    
 
     <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="لوگو" id="logo"></img></a>
-
 
     <!-- Links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -19,7 +17,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link nav_button" href="blog.php">وبلاگ</a>
+          <a class="nav-link nav_button" href="admin_blog_view.php">وبلاگ</a>
         </li>
 
         <li class="nav-item">
@@ -28,6 +26,10 @@
 
         <li class="nav-item">
           <a class="nav-link nav_button" href="#">فروشگاه</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav_button" href="admin_dashboard.php">پنل ادمین</a>
         </li>
 
         <!-- Dropdown -->

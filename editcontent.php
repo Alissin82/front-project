@@ -17,7 +17,7 @@
             <section class="row" id="error">
                 <?php
                     require('php/server.php');
-                    $connection = connect();
+                    $db = connect();
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         
 
@@ -36,16 +36,16 @@
                         $blg_meta_word = $blg_title;
                         $blg_meta_summary = $_POST['blg_meta_summary'];
 
-                        $sql = "UPDATE blog_content 
-                        SET blg_title = '$blg_title', blg_author = '$blg_author'
-                        , blg_content = '$blg_content', blg_category = '$blg_category'
-                        , blg_date = '$blg_date', blg_time = '$blg_time'
-                        , blg_meta_word = '$blg_meta_word', blg_meta_summary = '$blg_meta_summary'
-                        WHERE blg_rowid = '$blg_rowid'";
+                        $update = $db->query('UPDATE blog_content SET
+                        blg_title = ?,blg_author = ?,blg_content = ?,blg_category = ?,
+                        blg_date = ?,blg_time = ?,blg_meta_word = ?, blg_meta_summary = ?
+                        WHERE blg_rowid = ?',
+                        $blg_title,$blg_author,$blg_content,$blg_category,$blg_date,
+                        $blg_time, $blg_meta_word, $blg_meta_summary, $blg_rowid);
+                        
+                        $result = $update->affectedRows();
 
-                        $result = mysqli_query($connection,$sql);
-
-                        if ($result) {
+                        if ($result > 0) {
                             echo "<p class='alert alert-success alert-dismissible fade show'><strong>پیام سیستم</strong> ویرایش محتوا شما با موفقیت انجام شد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
                         }
                         else {
@@ -54,16 +54,13 @@
                     }
                     else {
                         $code = $_GET['code'];
-                        $sql = "SELECT * FROM blog_content WHERE blg_rowid='$code'";
 
-                        $result = mysqli_query($connection,$sql);
+                        $row = $db->query('SELECT * FROM blog_content WHERE blg_rowid = ?',$code)->fetchArray();
 
-                        if (mysqli_num_rows($result)==0) {
-                            echo "<p class='alert alert-danger alert-dismissible fade show'><strong>خطا</strong> محتوا شما برای ویرایش یافت نشد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
-                            return;
+                        if ($row == NULL) {
+                            die("<p class='alert alert-danger alert-dismissible fade show'><strong>خطا</strong> محتوا شما برای ویرایش یافت نشد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>");
                         }
                     
-                        $row = mysqli_fetch_assoc($result);
                         $blg_title = $row['blg_title'];
                         $blg_author = $row['blg_author'];
                         $blg_content = $row['blg_content'];

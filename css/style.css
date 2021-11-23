@@ -1,0 +1,74 @@
+@font-face {
+    font-family: iransans; 
+    src: url('font/iransansweb.ttf');
+  }
+  
+  .require {
+    color: red;
+    font-weight: bold;
+  }
+  
+  input[type="number"] {
+    display: inline-block;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  * {
+    font-family: iransans;
+    box-sizing: border-box !important;
+  }
+  
+  .alert-danger {
+    margin-left: 5px;
+  }
+  
+  #logo{
+    width:150px !important;
+  }
+  header{
+    background-color:white;
+    box-shadow:0px -2px 5px black;
+    padding:10px;
+    z-index:1;
+  }
+  .nav-link{
+    color:black !important;
+  }
+  .navbar-toggler{
+    color:black !important;
+    border-color:black !important;
+    background-color:rgba(0,0,0,1);
+  }
+  .navbar-toggler-icon{
+    color:black !important;
+    border-color:black !important;
+  }
+  footer{
+    background-color:white;
+    box-shadow:0px 2px 5px black;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    z-index:10;
+  }
+  header form {
+    float:left !important;
+    display:block !important;
+  }
+  main{
+    position: relative;
+    width:100%;
+    padding: 0.5em;
+    padding-top: 100px !important;
+    padding-bottom: 40px !important;
+  }
+  
+  body{
+    position: absolute;
+    width:100%;
+    background-color: #EFE1CB;
+    
+  }

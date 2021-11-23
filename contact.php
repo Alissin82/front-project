@@ -15,7 +15,7 @@ session_start();
             <?php 
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                   require('php/server.php');
-                  $connection = connect();
+                  $db = connect();
 
                   $title = $_POST['txttitle'];
                   $fname = $_POST['txtfname'];
@@ -23,9 +23,8 @@ session_start();
                   $email = $_POST['txtemail'];
                   $content = $_POST['txtcontent'];
 
-                  $sql = "INSERT INTO contact_us_table (title,fname,lname,email,content) VALUES ('$title','$fname','$lname','$email','$content')";
-                  
-                  $result = mysqli_query($connection,$sql);
+                  $insert = $db->query('INSERT INTO contact_us_table (title,fname,lname,email,content) VALUES (?,?,?,?,?)', $title, $fname, $lname, $email, $content);
+                  $result = $insert->affectedRows();
 
                   if ($result) {
                       echo "<p class='alert alert-success alert-dismissible fade show'><strong>پیام سیستم</strong> پیام شما با موفقیت ارسال شد <button type='button' class='close' data-dismiss='alert'>&times;</button></p>";
